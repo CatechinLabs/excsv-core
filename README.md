@@ -1,0 +1,2 @@
+# excsv-core
+npm
