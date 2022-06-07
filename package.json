@@ -1,0 +1,8 @@
+{
+  "name": "excsv-core",
+  "version": "v0.0.0-α",
+  "main": "index.js",
+  "repository": "https://github.com/ExtendTextFile/excsv-core.git",
+  "author": "ExtendTextFile <https://github.com/ExtendTextFile>",
+  "license": "MIT"
+}
