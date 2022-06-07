@@ -5,15 +5,36 @@
   "repository": "https://github.com/ExtendTextFile/excsv-core.git",
   "author": "ExtendTextFile <https://github.com/ExtendTextFile>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@/(.+)": "<rootDir>/src/$1"
+    },
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ]
+  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
-    "@vue/eslint-config-prettier": "^7.0.0",
-    "@vue/eslint-config-typescript": "^10.0.0",
     "eslint": "^8.14.0",
-    "eslint-plugin-vue": "^8.7.1",
     "jest": "^28.1.1",
     "prettier": "^2.6.2",
     "typescript": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.1",
+    "ts-jest": "^28.0.4",
+    "ts-node": "^10.8.1"
   }
 }
