@@ -4,7 +4,7 @@
 
 ### 機能の優先順位
 
-- [ ] CSVの読み込み
+- [x] CSVの読み込み
 - [ ] セルの参照
 - [ ] CONCATENATE
 - [ ] IFERROR
@@ -19,7 +19,7 @@ import ExCsv from ('ExCsv')
 const exCsv = new ExCsv();
 
 // ロード
-exCsv.load('path/to/file.ex.csv');
+await exCsv.load('path/to/file.ex.csv');
 
 // 参照(関数の計算をする)
 const a1 = exCsv.get('A1'); // 値
@@ -31,6 +31,9 @@ const option = {
   execute: false, // 関数を実行するか
 }
 const a1sonomama = exCsv.get('A1', option); // 値
+
+// 値のセット
+// exCsv.get('A1');
 
 // すべての関数を評価した結果を返す
 const csvText = exCsv.execute();
