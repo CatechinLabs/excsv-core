@@ -23,18 +23,38 @@ export class ExCsv {
     })
 
     this.data = records
-    console.log("🐕 this.data", this.data)
+    console.log('🐕 this.data', this.data)
   }
 
   // ex: A1
   get(cell: string): string {
-    const column = cell.match(/([A-Z]+)/)![0] //"A"; // -> 0
-    const row = +cell.match(/([0-9]+)/)![0] // -> row-1 -> 0
+    // この辺で参照か関数か?
+    const isConcatlate = cell.match(/^=CONCATENATE/) !== null
+    if (isConcatlate) {
+      console.log('関数だよ')
+      // ↓CONCATENATE
+      // カッコの中の値をカンマ区切りで取得する
+      const reg = /\((\S+), *(\S+)\)/g
+      const hgoe = cell.matchAll(reg)
+      const huga = [...hgoe].map((x) => x.map((y) => y))
+      const a = huga[0][1].trim().replaceAll('"', '')
+      const b = huga[0][2].trim().replaceAll('"', '')
+      const res = a + b
+      
+      return res
+      // ↑CONCATENATE
+    } else {
+      console.log('参照だよ')
+      // ↓ 参照の処理
+      const column = cell.match(/([A-Z]+)/)![0] //"A"; // -> 0
+      const row = +cell.match(/([0-9]+)/)![0] // -> row-1 -> 0
 
-    const columnNumber = Columns.getColumNumber(column)
-    const rowNumber = row - 1
+      const columnNumber = Columns.getColumNumber(column)
+      const rowNumber = row - 1
 
-    return this.data[rowNumber][columnNumber]
+      return this.data[rowNumber][columnNumber]
+      // ↑ 参照の処理
+    }
   }
 
   /**

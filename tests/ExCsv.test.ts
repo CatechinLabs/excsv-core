@@ -16,4 +16,13 @@ describe('neko', (): void => {
     const response: string = exCsv.neko()
     expect(response).toBe('neko')
   })
+
+  test('CONCATENATEのテスト', (): void => {
+    const exCsv = new ExCsv()
+    const res: string = exCsv.get('=CONCATENATE("猫", "犬")')
+    expect(res).toBe('猫犬')
+
+    expect(exCsv.get('=CONCATENATE("A1", "cat")')).toBe('A1cat')
+    expect(exCsv.get('=CONCATENATE("1", "1")')).toBe('11')
+  })
 })

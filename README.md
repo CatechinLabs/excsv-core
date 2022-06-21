@@ -6,7 +6,9 @@
 
 - [x] CSVの読み込み
 - [x] セルの参照
-- [ ] CONCATENATE // 文字結合
+- [x] CONCATENATE // 文字結合
+- [ ] 列名の数字への変換
+- [ ] BNF記法を導入
 - [ ] IFERROR
 - [ ] 演算子 +-*/
 
@@ -31,6 +33,13 @@ const option = {
   execute: false, // 関数を実行するか
 }
 const a1sonomama = exCsv.get('A1', option); // 値
+
+
+// こんきゃと
+const a1b10 = exCsv.get('=CONCATENATE("猫", "犬")'); // 猫犬
+const a1b10 = exCsv.get('=CONCATENATE(A1, A2)');
+const a1b10 = exCsv.get('=CONCATENATE(A1, "猫")');
+
 
 // 値のセット
 // exCsv.get('A1');
