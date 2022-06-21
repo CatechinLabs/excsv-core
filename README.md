@@ -5,8 +5,8 @@
 ### 機能の優先順位
 
 - [x] CSVの読み込み
-- [ ] セルの参照
-- [ ] CONCATENATE
+- [x] セルの参照
+- [ ] CONCATENATE // 文字結合
 - [ ] IFERROR
 - [ ] 演算子 +-*/
 
