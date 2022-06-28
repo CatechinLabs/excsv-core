@@ -49,7 +49,7 @@ export class ExCsv {
       const column = cell.match(/([A-Z]+)/)![0] //"A"; // -> 0
       const row = +cell.match(/([0-9]+)/)![0] // -> row-1 -> 0
 
-      const columnNumber = Columns.getColumNumber(column)
+      const columnNumber = Columns.getColumNumber10(column)
       const rowNumber = row - 1
 
       return this.data[rowNumber][columnNumber]
