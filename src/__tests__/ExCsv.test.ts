@@ -17,12 +17,23 @@ describe('neko', (): void => {
     expect(response).toBe('neko')
   })
 
-  test('CONCATENATEのテスト', (): void => {
-    const exCsv = new ExCsv()
-    const res: string = exCsv.get('=CONCATENATE("猫", "犬")')
-    expect(res).toBe('猫犬')
+  // test('CONCATENATEのテスト', (): void => {
+  //   const exCsv = new ExCsv()
+  //   const res: string = exCsv.get('=CONCATENATE("猫", "犬")')
+  //   expect(res).toBe('猫犬')
 
-    expect(exCsv.get('=CONCATENATE("A1", "cat")')).toBe('A1cat')
-    expect(exCsv.get('=CONCATENATE("1", "1")')).toBe('11')
+  //   expect(exCsv.get('=CONCATENATE("A1", "cat")')).toBe('A1cat')
+  //   expect(exCsv.get('=CONCATENATE("1", "1")')).toBe('11')
+  // })
+
+  test('関数の実行のテスト 「=1+1」', (): void => {
+    const exCsv = new ExCsv()
+    const res: string = exCsv.get('=1+1')
+    expect(res).toBe('2')
+  })
+  test('関数の実行のテスト 「=2*10+10」', (): void => {
+    const exCsv = new ExCsv()
+    const res: string = exCsv.get('=2*(10+10)')
+    expect(res).toBe('40')
   })
 })

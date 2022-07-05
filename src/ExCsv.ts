@@ -1,6 +1,7 @@
 import { parse } from 'csv-parse/sync'
 import { stringify } from 'csv-stringify/sync'
 import { Columns } from '@/Columns'
+import {calc} from '@/Calc'
 
 import * as fs from 'fs'
 export class ExCsv {
@@ -29,19 +30,26 @@ export class ExCsv {
   // ex: A1
   get(cell: string): string {
     // この辺で参照か関数か?
-    const isConcatlate = cell.match(/^=CONCATENATE/) !== null
-    if (isConcatlate) {
+    // const isConcatlate = cell.match(/^=CONCATENATE/) !== null
+    const isFunction = cell.match(/^=/) !== null
+    if (isFunction) {
       console.log('関数だよ')
       // ↓CONCATENATE
       // カッコの中の値をカンマ区切りで取得する
-      const reg = /\((\S+), *(\S+)\)/g
-      const hgoe = cell.matchAll(reg)
-      const huga = [...hgoe].map((x) => x.map((y) => y))
-      const a = huga[0][1].trim().replaceAll('"', '')
-      const b = huga[0][2].trim().replaceAll('"', '')
-      const res = a + b
+      // const reg = /\((\S+), *(\S+)\)/g
+      // const hgoe = cell.matchAll(reg)
+      // const huga = [...hgoe].map((x) => x.map((y) => y))
+      // const a = huga[0][1].trim().replaceAll('"', '')
+      // const b = huga[0][2].trim().replaceAll('"', '')
+      // const res = a + b
       
-      return res
+      const reg = /^=/g
+      const expr = cell.replace(reg,"")
+      console.log({expr})
+      const result=  calc.parse(expr)
+      const res : number = calc.evaluate(result);
+
+      return res.toString()
       // ↑CONCATENATE
     } else {
       console.log('参照だよ')
@@ -49,7 +57,7 @@ export class ExCsv {
       const column = cell.match(/([A-Z]+)/)![0] //"A"; // -> 0
       const row = +cell.match(/([0-9]+)/)![0] // -> row-1 -> 0
 
-      const columnNumber = Columns.getColumNumber10(column)
+      const columnNumber = Columns.getColumNumber(column)
       const rowNumber = row - 1
 
       return this.data[rowNumber][columnNumber]
