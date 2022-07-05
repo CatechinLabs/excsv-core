@@ -6,9 +6,10 @@
 
 - [x] CSVの読み込み
 - [x] セルの参照
-- [x] CONCATENATE // 文字結合
 - [x] 列名の数字への変換
 - [x] BNF記法を導入
+- [ ] セルの参照(BNF記法で)
+- [ ] CONCATENATE(BNF記法で) // 文字結合
 - [ ] IFERROR
 - [ ] 演算子 +-*/
 

@@ -26,11 +26,27 @@ describe('neko', (): void => {
   //   expect(exCsv.get('=CONCATENATE("1", "1")')).toBe('11')
   // })
 
-  test('関数の実行のテスト 「=1+1」', (): void => {
+  // TODO: このテストは失敗する
+  test('関数の実行のテスト 「=A1」参照してから足す', (): void => {
     const exCsv = new ExCsv()
-    const res: string = exCsv.get('=1+1')
-    expect(res).toBe('2')
+    const res: string = exCsv.get('=A1')
+    expect(res).toBe('')
   })
+
+  // TODO: このテストは失敗する
+  // test('関数の実行のテスト 「=1+A1」参照してから足す', (): void => {
+  //   const exCsv = new ExCsv()
+  //   const res: string = exCsv.get('=1+A1')
+  //   expect(res).toBe('')
+  // })
+
+  // TODO: このテストは失敗する
+  // test('関数の実行のテスト 「=CONCATENATE(A1,A2)」参照してからCONCATENATE', (): void => {
+  //   const exCsv = new ExCsv()
+  //   const res: string = exCsv.get('=CONCATENATE(A1,A2)')
+  //   expect(res).toBe('')
+  // })
+
   test('関数の実行のテスト 「=2*10+10」', (): void => {
     const exCsv = new ExCsv()
     const res: string = exCsv.get('=2*(10+10)')
