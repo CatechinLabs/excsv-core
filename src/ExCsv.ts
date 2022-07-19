@@ -45,8 +45,13 @@ export class ExCsv {
       
       const reg = /^=/g
       const expr = cell.replace(reg,"")
-      console.log({expr})
-      const result=  calc.parse(expr)
+      console.log({expr}) // 先頭の=を除去した文字列
+      
+      // TODO: 参照を解決する
+      const ref = this.refer(expr)
+
+      // BNFに食わす
+      const result= calc.parse(ref)
       const res : number = calc.evaluate(result);
 
       return res.toString()
@@ -63,6 +68,39 @@ export class ExCsv {
       return this.data[rowNumber][columnNumber]
       // ↑ 参照の処理
     }
+  }
+
+  /**
+   * セル参照を解決する
+   */
+  refer(expr: string) { 
+    // A1
+    // A1+A2
+
+    const reg = /([A-Z]+[1-9][0-9]*)/g
+    const ref = expr.matchAll(reg)
+    const huga = [...ref].map((x) => x.map((y) => y))
+
+    console.log({huga})
+
+
+    huga.map(refStr => {
+      // ↓ 参照の処理
+      const column = refStr[0][1].match(/([A-Z]+)/)![0] //"A"; // -> 0
+      const row = +refStr[0][1].match(/([0-9]+)/)![0] // -> row-1 -> 0
+
+      const columnNumber = Columns.getColumNumber(column)
+      const rowNumber = row - 1
+
+      const refVal = this.data[rowNumber][columnNumber]
+      // ↑ 参照の処理
+    })
+
+
+    // マッチした分、値の取得と置換
+    const a = huga[0][1].trim().replaceAll('"', '')
+    const res = this.get(a)
+    return res
   }
 
   /**
